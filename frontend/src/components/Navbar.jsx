@@ -7,7 +7,7 @@ function Navbar() {
         <img
           src="/logo.png" // replace with your logo image path
           alt="Golden Eagle Logo"
-          className="w-10 h-10 object-contain"
+          className="logo"
         />
         <h1 className="text-xl font-semibold">Golden Eagle</h1>
       </div>

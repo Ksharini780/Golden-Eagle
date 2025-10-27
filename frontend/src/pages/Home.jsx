@@ -6,7 +6,7 @@ function Home() {
         <img
           src="/logo.png"
           alt="Golden Eagle Logo"
-          className="mx-auto w-20 h-20 object-contain mb-6"
+          className="logo"
         />
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gold">
           Welcome to Golden Eagle General Services

@@ -7,3 +7,23 @@ body {
   color: #EAEAEA;
   font-family: 'Poppins', sans-serif;
 }
+
+.logo {
+  width: 180px;          /* default desktop size */
+  height: auto;
+  object-fit: contain;
+}
+
+/* For tablets */
+@media (max-width: 768px) {
+  .logo {
+    width: 140px;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+  .logo {
+    width: 110px;
+  }
+}
