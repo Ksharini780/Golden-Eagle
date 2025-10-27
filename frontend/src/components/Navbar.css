@@ -1,0 +1,58 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 12px 40px;
+  box-shadow: 0 4px 10px rgba(218, 165, 32, 0.3);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-image {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.navbar-title {
+  color: gold;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: goldenrod;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: gold;
+}
+
+/* Optional: Make it responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+}

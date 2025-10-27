@@ -1,21 +1,22 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-black text-white border-b border-gray-700">
-      <div className="flex items-center space-x-2">
-        <img
-          src="/logo.png" // replace with your logo image path
-          alt="Golden Eagle Logo"
-          className="logo"
-        />
-        <h1 className="text-xl font-semibold">Golden Eagle</h1>
+    <nav className="navbar">
+      <div className="navbar-logo">
+        <img src="/logo.png" alt="Golden Eagle Logo" className="logo-image" />
+        <h1 className="navbar-title">Golden Eagle</h1>
       </div>
-      <ul className="flex space-x-6">
-        <li><Link to="/" className="hover:text-yellow-400">Home</Link></li>
-        <li><Link to="/services" className="hover:text-yellow-400">Services</Link></li>
-        <li><Link to="/book" className="hover:text-yellow-400">Book Now</Link></li>
-        <li><Link to="/contact" className="hover:text-yellow-400">Contact</Link></li>
+
+      <ul className="navbar-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/services">Services</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/addservice">Add Service</Link></li>
+        <li><Link to="/book">Book Now</Link></li>
       </ul>
     </nav>
   );
