@@ -5,10 +5,14 @@ import "./Navbar.css";
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <img src="/logo.png" alt="Golden Eagle Logo" className="logo-image" />
-        <h1 className="navbar-title">Golden Eagle</h1>
+      <div className="logo-container">
+          <img src="/logo.png" alt="Golden Eagle Logo" className="logo-image" />
+          <div className="logo-text">
+             <h1 className="main-title">Golden Eagle</h1>
+             <p className="sub-title">General Services</p>
+          </div>
       </div>
+
 
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
