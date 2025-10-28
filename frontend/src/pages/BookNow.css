@@ -1,0 +1,66 @@
+.book-container {
+  min-height: 100vh;
+  background-color: #000; /* Black background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #eaeaea;
+  padding: 50px 20px;
+}
+
+.book-title {
+  color: goldenrod;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.book-form {
+  background-color: #111;
+  border: 1px solid goldenrod;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+}
+
+.book-form input,
+.book-form textarea {
+  border: 2px solid goldenrod;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #eaeaea;
+  color: #000;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.book-form input:focus,
+.book-form textarea:focus {
+  box-shadow: 0 0 10px goldenrod;
+  background-color: #fff9e6;
+}
+
+.book-form button {
+  background-color: goldenrod;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-form button:hover {
+  background-color: #e0b84c;
+  transform: translateY(-2px);
+}

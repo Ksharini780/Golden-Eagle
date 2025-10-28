@@ -1,35 +1,42 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import "./BookNow.css";
 
 function BookNow() {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
-    address: "",
-    service: "Cleaning",
+    service: "",
+    date: "",
+    message: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Your booking request has been sent to the owner!");
-    // Later you’ll integrate backend + email sending
+    alert("Booking request submitted successfully!");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
-      <h2 className="text-3xl font-bold mb-6">Book a Service</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-900 p-6 rounded-lg shadow-lg w-96 space-y-4"
-      >
+    <div className="book-container">
+      <h2 className="book-title">Book Your Service</h2>
+      <form className="book-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
-          placeholder="Your Name"
-          className="w-full p-2 rounded bg-gray-800 text-white"
+          placeholder="Full Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
           onChange={handleChange}
           required
         />
@@ -37,33 +44,34 @@ function BookNow() {
           type="tel"
           name="phone"
           placeholder="Phone Number"
-          className="w-full p-2 rounded bg-gray-800 text-white"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="service"
+          placeholder="Service Required"
+          value={formData.service}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
           onChange={handleChange}
           required
         />
         <textarea
-          name="address"
-          placeholder="Address"
-          className="w-full p-2 rounded bg-gray-800 text-white"
+          name="message"
+          placeholder="Additional Message"
+          value={formData.message}
           onChange={handleChange}
-          required
+          rows="4"
         ></textarea>
-        <select
-          name="service"
-          className="w-full p-2 rounded bg-gray-800 text-white"
-          onChange={handleChange}
-        >
-          <option>Cleaning</option>
-          <option>Maintenance</option>
-          <option>Pest Control</option>
-          <option>Electrical Work</option>
-        </select>
-        <button
-          type="submit"
-          className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 rounded"
-        >
-          Submit
-        </button>
+
+        <button type="submit">Submit Booking</button>
       </form>
     </div>
   );
