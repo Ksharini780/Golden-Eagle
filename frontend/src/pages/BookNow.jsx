@@ -7,7 +7,8 @@ const BookNow = () => {
     email: "",
     countryCode: "+65",
     phone: "",
-    service: "",
+    service1: "",
+    service2: "",
   });
 
   const handleChange = (e) => {
@@ -21,8 +22,7 @@ const BookNow = () => {
     if (
       !formData.name ||
       !formData.email ||
-      !formData.phone ||
-      !formData.service
+      !formData.phone 
     ) {
       alert("Please fill in all fields before submitting.");
       return;
@@ -95,12 +95,11 @@ const BookNow = () => {
         </div>
 
         <div className="form-group">
-          <label>Service Required:</label>
+          <label>Cleaning Service Required:</label>
           <select
-            name="service"
+            name="service1"
             value={formData.service}
             onChange={handleChange}
-            required
           >
             <option value="">Select a service</option>
             <option value="Office and Building Cleaning">
@@ -114,8 +113,33 @@ const BookNow = () => {
             </option>
             <option value="Floor Polishing">Floor Polishing</option>
             <option value="Carpet Cleaning">Carpet Cleaning</option>
+             <option value="Factories Cleaning">Factories Cleaning</option>
+              <option value="Public Areas Cleaning">Public Areas Cleaning</option>
           </select>
         </div>
+
+        
+        <div className="form-group">
+          <label>Marine Construction Service Required:</label>
+          <select
+            name="service2"
+            value={formData.service}
+            onChange={handleChange}
+          >
+            <option value="">Select a service</option>
+            <option value="Harbours">
+              Harbours
+            </option>
+            <option value="Piers">
+              Piers
+            </option>
+            <option value="Docks">
+              Docks
+            </option>
+            <option value="Wharves">Wharves</option>
+          </select>
+        </div>
+
 
         <button type="submit" className="book-btn">
           Submit
