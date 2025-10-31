@@ -1,15 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        gold: '#D4AF37',
-        black: '#000000',
-        lightgray: '#EAEAEA',
+        gold: "#FFD700",
+        black: "#000000",
+        dark: "#111111",
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },

@@ -2,26 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Global body styling */
 body {
-  background-color: #000000;
-  color: #EAEAEA;
+  background-color: #000;
+  color: #FFD700;
   font-family: 'Poppins', sans-serif;
 }
 
+/* Responsive Golden Eagle logo size */
 .logo {
-  width: 180px;          /* default desktop size */
+  width: 180px;   /* Desktop default */
   height: auto;
   object-fit: contain;
 }
 
-/* For tablets */
+/* Tablet view */
 @media (max-width: 768px) {
   .logo {
     width: 140px;
   }
 }
 
-/* For mobile screens */
+/* Mobile view */
 @media (max-width: 480px) {
   .logo {
     width: 110px;
