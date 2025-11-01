@@ -8,7 +8,7 @@ const ContactUs = () => {
       <div className="contact-page">
         <h1 className="contact-title">Get in Touch</h1>
         <p className="contact-description">
-          We at <strong>Golden Eagle Cleaning Solution Pte. Ltd</strong> are
+          We at <strong>Golden Eagle  Solution Pte. Ltd</strong> are
           dedicated to delivered exceptional cleaning and maintenance services
           for commercial, industrial, and marine environments across Singapore
           Today.
