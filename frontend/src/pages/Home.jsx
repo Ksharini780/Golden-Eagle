@@ -6,8 +6,19 @@ function Home() {
         <img
           src="/logo.png"
           alt="Golden Eagle Logo"
-          className="logo"
+          className="logo mx-auto mb-4"
         />
+
+        {/* New Line Below Logo */}
+        <div className="text-center mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-wide">
+            GOLDEN EAGLE <span className="block text-2xl md:text-3xl text-gray-300 font-semibold mt-1">SOLUTIONS</span>
+          </h2>
+          <p className="text-gold font-semibold mt-2 text-lg md:text-xl tracking-wider">
+            EXCELLENCE IN EVERY TASK.
+          </p>
+        </div>
+
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gold">
           Welcome to Golden Eagle General Services
         </h1>
@@ -20,6 +31,15 @@ function Home() {
         >
           Book a Service
         </a>
+
+        {/* Add Image Section */}
+        <div className="mt-10">
+          <img
+            src="/cleaning-team.png"
+            alt="Golden Eagle Cleaning Team"
+            className="rounded-xl shadow-lg mx-auto w-full max-w-4xl"
+          />
+        </div>
       </div>
 
       {/* About / Highlights */}

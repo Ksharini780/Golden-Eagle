@@ -6,13 +6,15 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo-container">
-          <img src="/logo.png" alt="Golden Eagle Logo" className="logo-image" />
-          <div className="logo-text">
-             <h1 className="main-title">Golden Eagle</h1>
-             <p className="sub-title">Solutions</p>
-          </div>
-      </div>
+        <img src="/logo.png" alt="Golden Eagle Logo" className="logo-image" />
 
+        <div className="logo-text">
+          <h1 className="main-title">GOLDEN EAGLE</h1>
+          <p className="sub-title">SOLUTIONS</p>
+          {/* New Tagline */}
+          <p className="tagline">EXCELLENCE IN EVERY TASK.</p>
+        </div>
+      </div>
 
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>

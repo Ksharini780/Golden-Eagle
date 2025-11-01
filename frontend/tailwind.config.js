@@ -1,20 +1,17 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
     extend: {
       colors: {
-        gold: "#FFD700",
-        black: "#000000",
-        dark: "#111111",
+        gold: '#d6b24a'
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-      },
-    },
+        poppins: ['Poppins', 'system-ui', 'sans-serif']
+      }
+    }
   },
   plugins: [],
-};
+}
