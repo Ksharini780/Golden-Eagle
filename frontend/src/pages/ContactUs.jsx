@@ -8,11 +8,19 @@ const ContactUs = () => {
       <div className="contact-page">
         <h1 className="contact-title">Get in Touch</h1>
         <p className="contact-description">
+<<<<<<< HEAD
           We at <strong>Golden Eagle Solution Pte. Ltd</strong> are dedicated to
           delivered exceptional cleaning and maintenance services for
           commercial, industrial, and marine environments across Singapore
           Today.
         </p>
+=======
+          We at <strong className="golden-text">Golden Eagle Solutions </strong> are
+         dedicated to delivered <br></br>exceptional cleaning and maintenance services
+        for commercial, industrial,<br></br> and marine environments across Singapore Today.
+   </p>
+
+>>>>>>> 7d73894 (icon change)
 
         <div className="contact-container">
           {/* Left Section */}

@@ -33,6 +33,11 @@
   flex: 1;
   min-width: 300px;
 }
+.golden-text {
+  color: #d4af37; /* classic gold */
+  font-weight: 700; /* optional: make it bold */
+}
+
 
 .info-item {
   margin-bottom: 25px;

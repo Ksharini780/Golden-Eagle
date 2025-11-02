@@ -25,7 +25,7 @@ function Home() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gold">
-          Welcome to Golden Eagle General Services
+          Welcome to Golden Eagle Solutions
         </h1>
         <p className="text-lg md:text-xl text-gray-300 mb-8">
           Premium cleaning and maintenance solutions delivered with excellence.
