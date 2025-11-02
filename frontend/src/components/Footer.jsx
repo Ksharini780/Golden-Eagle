@@ -11,7 +11,7 @@ const Footer = () => {
           <img src="/logo.png" alt="Golden Eagle Logo" className="footer-logo-img" />
           <div>
             <h2>GOLDEN EAGLE SOLUTIONS</h2>
-             <p className="footer-tagline">EXCELLENCE IN EVERY TASK.</p>
+             <p className="footer-tagline">EXCELLENCE IN EVERY TASK</p>
           </div>
         </div>
 

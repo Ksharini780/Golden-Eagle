@@ -9,7 +9,7 @@ function About() {
       <div className="about-header">
         <h1>About Us</h1>
         <p>
-          Discover more about <span>Golden Eagle Cleaning Solution Pte. Ltd</span> — our mission,
+          Discover more about <span>Golden Eagle  Solutions</span> — our mission,
           story, and the values that define us.
         </p>
       </div>
@@ -19,7 +19,7 @@ function About() {
         <div className="about-text">
           <h2>Our Mission</h2>
           <p>
-            At <span>Golden Eagle Cleaning Solution Pte. Ltd</span>, our mission is to deliver
+            At <span>Golden Eagle  Solutions </span>, our mission is to deliver
             exceptional cleaning and maintenance services across Singapore. We aim to redefine
             professionalism by combining efficiency, consistency, and trust.
           </p>
@@ -41,7 +41,7 @@ function About() {
         <div className="about-text">
           <h2>Our Story</h2>
           <p>
-            Established in Singapore, <span>Golden Eagle Cleaning Solution Pte. Ltd</span> was built
+            Established in Singapore, <span>Golden Eagle  Solutions </span> was built
             with a simple vision — to create cleaner, safer, and more hygienic spaces for everyone.
           </p>
           <p>
