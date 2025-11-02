@@ -20,7 +20,7 @@ function Home() {
             </span>
           </h2>
           <p className="text-gold font-semibold mt-2 text-lg md:text-xl tracking-wider">
-            EXCELLENCE IN EVERY TASK.
+            EXCELLENCE IN EVERY TASK
           </p>
         </div>
 

@@ -38,7 +38,7 @@ function Navbar() {
         <div className="logo-text">
           <h1 className="main-title">GOLDEN EAGLE</h1>
           <p className="sub-title">SOLUTIONS</p>
-          <p className="tagline">EXCELLENCE IN EVERY TASK.</p>
+          <p className="tagline">EXCELLENCE IN EVERY TASK</p>
         </div>
       </div>
 
