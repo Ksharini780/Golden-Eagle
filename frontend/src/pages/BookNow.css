@@ -145,12 +145,12 @@
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
 
-.booknow-form input:hover,
-.booknow-form textarea:hover,
-.booknow-form select:hover,
-.booknow-form .phone-wrapper:hover {
+.booknow-form input:focus,
+.booknow-form textarea:focus,
+.booknow-form select:focus,
+.booknow-form .phone-wrapper:focus-within {
   border-color: gold;
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+  box-shadow: 0 0 20px rgba(218, 165, 32, 1);
   transition: all 0.3s ease;
 }
 
