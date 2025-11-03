@@ -50,21 +50,21 @@
   font-size: 16px;
   color: black;
   background-color: #fff;
-  box-shadow: 0 0 8px rgba(218, 165, 32, 0.3);
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
   transition: all 0.3s ease;
 }
 
-/* placeholder color for inputs */
+
 .booknow-form input::placeholder {
   color: grey;
 }
 
-/* select placeholder color until valid selection */
+
 .booknow-form select {
   color: grey;
 }
 
-/* focus glow */
+
 .booknow-form input:focus,
 .booknow-form textarea:focus,
 .booknow-form select:focus,
@@ -73,7 +73,7 @@
   border-color: gold;
 }
 
-/* phone combined inline element */
+
 .phone-wrapper {
   display: flex;
   align-items: center;
@@ -105,7 +105,7 @@
   color: black;
 }
 
-/* Top-level toggle buttons row */
+
 .top-toggle-row {
   display: flex;
   gap: 12px;
@@ -115,8 +115,8 @@
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid rgba(212, 175, 55, 0.25);
-  background: rgba(255, 255, 255, 0.03);
-  color: #eaeaea;
+  background:#eaeaea ;
+  color: black;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -132,7 +132,7 @@
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
 
-/* submit button */
+
 .book-btn {
   background-color: goldenrod;
   color: #000;
@@ -143,6 +143,15 @@
   cursor: pointer;
   width: 100%;
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
+}
+
+.booknow-form input:hover,
+.booknow-form textarea:hover,
+.booknow-form select:hover,
+.booknow-form .phone-wrapper:hover {
+  border-color: gold;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+  transition: all 0.3s ease;
 }
 
 .book-btn:hover { transform: translateY(-2px); background-color: #e2b616; }
