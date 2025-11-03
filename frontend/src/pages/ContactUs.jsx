@@ -8,9 +8,9 @@ const ContactUs = () => {
       <div className="contact-page">
         <h1 className="contact-title">Get in Touch</h1>
         <p className="contact-description">
-          We at <strong>Golden Eagle  Solution Pte. Ltd</strong> are
-          dedicated to delivered exceptional cleaning and maintenance services
-          for commercial, industrial, and marine environments across Singapore
+          We at <strong>Golden Eagle Solution Pte. Ltd</strong> are dedicated to
+          delivered exceptional cleaning and maintenance services for
+          commercial, industrial, and marine environments across Singapore
           Today.
         </p>
 
@@ -49,20 +49,17 @@ const ContactUs = () => {
 
         {/* Map Section */}
         <div className="map-section">
-          <iframe
-            title="Golden Eagle Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.9874314968946!2d103.8490324747358!3d1.3770875986007838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da171a6c74f77f%3A0x6a3d32d88f85c40!2s603%20Ang%20Mo%20Kio%20Ave%205%2C%20Singapore%20560603!5e0!3m2!1sen!2ssg!4v1709382970208!5m2!1sen!2ssg"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
+          <div className="map-container">
+            <iframe
+              title="Golden Eagle Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.9874314968946!2d103.8490324747358!3d1.3770875986007838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da171a6c74f77f%3A0x6a3d32d88f85c40!2s603%20Ang%20Mo%20Kio%20Ave%205%2C%20Singapore%20560603!5e0!3m2!1sen!2ssg!4v1709382970208!5m2!1sen!2ssg"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </div>
-
-      {/* ✅ Footer Section */}
-      <Footer />
     </>
   );
 };

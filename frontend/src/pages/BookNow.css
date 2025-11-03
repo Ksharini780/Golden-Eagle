@@ -2,10 +2,37 @@
   max-width: 600px;
   margin: 60px auto;
   padding: 30px;
-  background-color: transparent; 
+  background-color: transparent;
   border: 2px solid goldenrod;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(218, 165, 32, 0.3);
+  width: 90%;
+}
+
+/* ✅ Responsive width scaling */
+@media (min-width: 600px) {
+  .booknow-container {
+    width: 85%;
+    max-width: 450px;
+  }
+}
+@media (min-width: 768px) {
+  .booknow-container {
+    width: 80%;
+    max-width: 520px;
+  }
+}
+@media (min-width: 992px) {
+  .booknow-container {
+    width: 70%;
+    max-width: 600px;
+  }
+}
+@media (min-width: 1200px) {
+  .booknow-container {
+    width: 60%;
+    max-width: 650px;
+  }
 }
 
 .booknow-title {
@@ -25,6 +52,7 @@
 
 .form-group {
   display: flex;
+  align-items: center;
   flex-direction: column;
   width: 100%;
 }
@@ -42,6 +70,7 @@
 .booknow-form input,
 .booknow-form textarea,
 .booknow-form select {
+  margin: auto;
   width: 100%;
   padding: 12px 14px;
   border: 2px solid goldenrod;
@@ -54,16 +83,13 @@
   transition: all 0.3s ease;
 }
 
-
 .booknow-form input::placeholder {
   color: rgb(104, 96, 96);
 }
 
-
 .booknow-form select {
   color: rgb(10, 0, 0);
 }
-
 
 .booknow-form input:focus,
 .booknow-form textarea:focus,
@@ -72,7 +98,6 @@
   box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
   border-color: gold;
 }
-
 
 .phone-wrapper {
   display: flex;
@@ -105,7 +130,6 @@
   color: black;
 }
 
-
 .top-toggle-row {
   display: flex;
   gap: 12px;
@@ -115,23 +139,27 @@
   padding: 10px 14px;
   border-radius: 8px;
   border: 2px solid rgba(212, 175, 55, 0.25);
-  background:#eaeaea ;
+  background: #eaeaea;
   color: black;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
 }
 
-.top-toggle:hover { transform: translateY(-2px); }
-
+.top-toggle:hover {
+  transform: translateY(-2px);
+}
 
 .top-toggle.active {
-  background: linear-gradient(180deg, rgba(212,175,55,1) 0%, rgba(212,175,55,0.85) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(212, 175, 55, 1) 0%,
+    rgba(212, 175, 55, 0.85) 100%
+  );
   color: #000;
   border: 2px solid goldenrod;
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
-
 
 .book-btn {
   background-color: goldenrod;
@@ -145,19 +173,16 @@
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
 
-.booknow-form input:focus,
-.booknow-form textarea:focus,
-.booknow-form select:focus,
-.booknow-form .phone-wrapper:focus-within {
-  border-color: gold;
-  box-shadow: 0 0 20px rgba(218, 165, 32, 1);
-  transition: all 0.3s ease;
+.book-btn:hover {
+  transform: translateY(-2px);
+  background-color: #e2b616;
 }
 
-.book-btn:hover { transform: translateY(-2px); background-color: #e2b616; }
-
-
 @media (max-width: 480px) {
-  .top-toggle-row { flex-direction: column; }
-  .phone-wrapper select { width: 90px; }
+  .top-toggle-row {
+    flex-direction: column;
+  }
+  .phone-wrapper select {
+    width: 90px;
+  }
 }

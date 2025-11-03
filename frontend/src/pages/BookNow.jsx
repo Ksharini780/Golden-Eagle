@@ -12,7 +12,6 @@ const BookNow = () => {
     message: "",
   });
 
-  // top-level toggles (user can select one or both)
   const [selectedTop, setSelectedTop] = useState({
     cleaning: false,
     marine: false,
@@ -43,19 +42,22 @@ const BookNow = () => {
       ...prev,
       [key]: !prev[key],
     }));
-    // if user untoggles, clear the corresponding sub-selection
+
     if (selectedTop[key]) {
-      if (key === "cleaning") setFormData((p) => ({ ...p, cleaningSubService: "" }));
-      if (key === "marine") setFormData((p) => ({ ...p, marineSubService: "" }));
+      if (key === "cleaning")
+        setFormData((p) => ({ ...p, cleaningSubService: "" }));
+      if (key === "marine")
+        setFormData((p) => ({ ...p, marineSubService: "" }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation: the user must choose at least one top-level and corresponding sub-service
     if (!selectedTop.cleaning && !selectedTop.marine) {
-      alert("Please choose at least one service category (Cleaning or Marine & Construction).");
+      alert(
+        "Please choose at least one service category (Cleaning or Marine & Construction)."
+      );
       return;
     }
     if (selectedTop.cleaning && !formData.cleaningSubService) {
@@ -74,12 +76,18 @@ const BookNow = () => {
     const chosen = [];
     if (selectedTop.cleaning) {
       chosen.push(
-        `Cleaning: ${cleaningOptions.find((o) => o.value === formData.cleaningSubService)?.label || formData.cleaningSubService}`
+        `Cleaning: ${
+          cleaningOptions.find((o) => o.value === formData.cleaningSubService)
+            ?.label || formData.cleaningSubService
+        }`
       );
     }
     if (selectedTop.marine) {
       chosen.push(
-        `Marine & Construction: ${marineOptions.find((o) => o.value === formData.marineSubService)?.label || formData.marineSubService}`
+        `Marine & Construction: ${
+          marineOptions.find((o) => o.value === formData.marineSubService)
+            ?.label || formData.marineSubService
+        }`
       );
     }
 
@@ -94,7 +102,6 @@ const BookNow = () => {
     console.log("Submitting booking:", payload);
     alert(`Thank you, ${formData.name}! Your booking has been received.`);
 
-    // reset form
     setFormData({
       name: "",
       email: "",
@@ -201,7 +208,6 @@ const BookNow = () => {
           </div>
         )}
 
-  
         {selectedTop.marine && (
           <div className="form-group">
             <label>Marine & Construction - Select service:</label>
