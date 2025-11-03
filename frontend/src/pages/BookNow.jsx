@@ -7,43 +7,113 @@ const BookNow = () => {
     email: "",
     countryCode: "+65",
     phone: "",
-    service1: "",
-    service2: "",
+    // We'll store the selected sub services separately
+    cleaningSubService: "",
+    marineSubService: "",
+    message: "",
   });
+
+  // top-level toggles (user can select one or both)
+  const [selectedTop, setSelectedTop] = useState({
+    cleaning: false,
+    marine: false,
+  });
+
+  const cleaningOptions = [
+    { value: "office_building", label: "Office & Building Cleaning" },
+    { value: "residential", label: "Condominium & Residential Cleaning" },
+    { value: "post_renovation", label: "Post-Renovation & Deep Cleaning" },
+    { value: "floor_polishing", label: "Floor Polishing" },
+    { value: "carpet_cleaning", label: "Carpet Cleaning" },
+  ];
+
+  const marineOptions = [
+    { value: "piers", label: "Piers" },
+    { value: "docks", label: "Docks" },
+    { value: "harbours", label: "Harbours" },
+    { value: "wharves", label: "Wharves" },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((p) => ({ ...p, [name]: value }));
+  };
+
+  // toggle top-level selection for cleaning / marine
+  const toggleTop = (key) => {
+    setSelectedTop((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+    // if user untoggles, clear the corresponding sub-selection
+    if (selectedTop[key]) {
+      if (key === "cleaning") setFormData((p) => ({ ...p, cleaningSubService: "" }));
+      if (key === "marine") setFormData((p) => ({ ...p, marineSubService: "" }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.phone 
-    ) {
-      alert("Please fill in all fields before submitting.");
+    // Validation: the user must choose at least one top-level and corresponding sub-service
+    if (!selectedTop.cleaning && !selectedTop.marine) {
+      alert("Please choose at least one service category (Cleaning or Marine & Construction).");
+      return;
+    }
+    if (selectedTop.cleaning && !formData.cleaningSubService) {
+      alert("Please select a Cleaning sub-service.");
+      return;
+    }
+    if (selectedTop.marine && !formData.marineSubService) {
+      alert("Please select a Marine & Construction sub-service.");
+      return;
+    }
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert("Please fill in name, email and phone before submitting.");
       return;
     }
 
-    alert(
-      `Thank you, ${formData.name}! Your booking for ${formData.service} has been received.`
-    );
+    // Build chosen services output (for sending to backend or email)
+    const chosen = [];
+    if (selectedTop.cleaning) {
+      chosen.push(
+        `Cleaning: ${cleaningOptions.find((o) => o.value === formData.cleaningSubService)?.label || formData.cleaningSubService}`
+      );
+    }
+    if (selectedTop.marine) {
+      chosen.push(
+        `Marine & Construction: ${marineOptions.find((o) => o.value === formData.marineSubService)?.label || formData.marineSubService}`
+      );
+    }
 
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: `${formData.countryCode} ${formData.phone}`,
+      services: chosen,
+      message: formData.message,
+    };
+
+    console.log("Submitting booking:", payload);
+    alert(`Thank you, ${formData.name}! Your booking has been received.`);
+
+    // reset form
     setFormData({
       name: "",
       email: "",
       countryCode: "+65",
       phone: "",
-      service: "",
+      cleaningSubService: "",
+      marineSubService: "",
+      message: "",
     });
+    setSelectedTop({ cleaning: false, marine: false });
   };
 
   return (
     <div className="booknow-container">
       <h2 className="booknow-title">Book a Service</h2>
+
       <form className="booknow-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name:</label>
@@ -94,52 +164,79 @@ const BookNow = () => {
           </div>
         </div>
 
+        {/* Top level selection: cleaning vs marine (user can select one or both) */}
         <div className="form-group">
-          <label>Cleaning Service Required:</label>
-          <select
-            name="service1"
-            value={formData.service}
-            onChange={handleChange}
-          >
-            <option value="">Select a service</option>
-            <option value="Office and Building Cleaning">
-              Office and Building Cleaning
-            </option>
-            <option value="Condominium and Residential Cleaning">
-              Condominium and Residential Cleaning
-            </option>
-            <option value="Post-Renovation and Deep Cleaning">
-              Post-Renovation and Deep Cleaning
-            </option>
-            <option value="Floor Polishing">Floor Polishing</option>
-            <option value="Carpet Cleaning">Carpet Cleaning</option>
-             <option value="Factories Cleaning">Factories Cleaning</option>
-              <option value="Public Areas Cleaning">Public Areas Cleaning</option>
-          </select>
+          <label>Service category:</label>
+          <div className="top-toggle-row">
+            <button
+              type="button"
+              className={`top-toggle ${selectedTop.cleaning ? "active" : ""}`}
+              onClick={() => toggleTop("cleaning")}
+            >
+              Cleaning Services
+            </button>
+
+            <button
+              type="button"
+              className={`top-toggle ${selectedTop.marine ? "active" : ""}`}
+              onClick={() => toggleTop("marine")}
+            >
+              Marine & Construction
+            </button>
+          </div>
         </div>
 
-        
-        <div className="form-group">
-          <label>Marine Construction Service Required:</label>
-          <select
-            name="service2"
-            value={formData.service}
-            onChange={handleChange}
-          >
-            <option value="">Select a service</option>
-            <option value="Harbours">
-              Harbours
-            </option>
-            <option value="Piers">
-              Piers
-            </option>
-            <option value="Docks">
-              Docks
-            </option>
-            <option value="Wharves">Wharves</option>
-          </select>
-        </div>
+        {/* show cleaning sub-dropdown when cleaning is selected */}
+        {selectedTop.cleaning && (
+          <div className="form-group">
+            <label>Cleaning - Select service:</label>
+            <select
+              name="cleaningSubService"
+              value={formData.cleaningSubService}
+              onChange={handleChange}
+              required={selectedTop.cleaning}
+            >
+              <option value="">Select a cleaning service</option>
+              {cleaningOptions.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
+        {/* show marine sub-dropdown when marine is selected */}
+        {selectedTop.marine && (
+          <div className="form-group">
+            <label>Marine & Construction - Select service:</label>
+            <select
+              name="marineSubService"
+              value={formData.marineSubService}
+              onChange={handleChange}
+              required={selectedTop.marine}
+            >
+              <option value="">Select a marine construction service</option>
+              {marineOptions.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Message textarea (restored) */}
+        <div className="form-group">
+          <label>Message:</label>
+          <textarea
+            name="message"
+            placeholder="Additional details or requests"
+            value={formData.message}
+            onChange={handleChange}
+            rows="4"
+          />
+        </div>
 
         <button type="submit" className="book-btn">
           Submit
