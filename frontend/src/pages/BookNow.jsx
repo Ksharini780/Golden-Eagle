@@ -7,7 +7,6 @@ const BookNow = () => {
     email: "",
     countryCode: "+65",
     phone: "",
-    // We'll store the selected sub services separately
     cleaningSubService: "",
     marineSubService: "",
     message: "",
@@ -39,7 +38,6 @@ const BookNow = () => {
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
-  // toggle top-level selection for cleaning / marine
   const toggleTop = (key) => {
     setSelectedTop((prev) => ({
       ...prev,
@@ -73,7 +71,6 @@ const BookNow = () => {
       return;
     }
 
-    // Build chosen services output (for sending to backend or email)
     const chosen = [];
     if (selectedTop.cleaning) {
       chosen.push(
@@ -164,7 +161,6 @@ const BookNow = () => {
           </div>
         </div>
 
-        {/* Top level selection: cleaning vs marine (user can select one or both) */}
         <div className="form-group">
           <label>Service category:</label>
           <div className="top-toggle-row">
@@ -186,7 +182,6 @@ const BookNow = () => {
           </div>
         </div>
 
-        {/* show cleaning sub-dropdown when cleaning is selected */}
         {selectedTop.cleaning && (
           <div className="form-group">
             <label>Cleaning - Select service:</label>
@@ -206,7 +201,7 @@ const BookNow = () => {
           </div>
         )}
 
-        {/* show marine sub-dropdown when marine is selected */}
+  
         {selectedTop.marine && (
           <div className="form-group">
             <label>Marine & Construction - Select service:</label>
@@ -226,7 +221,6 @@ const BookNow = () => {
           </div>
         )}
 
-        {/* Message textarea (restored) */}
         <div className="form-group">
           <label>Message:</label>
           <textarea

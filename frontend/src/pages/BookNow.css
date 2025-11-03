@@ -56,12 +56,12 @@
 
 
 .booknow-form input::placeholder {
-  color: grey;
+  color: rgb(104, 96, 96);
 }
 
 
 .booknow-form select {
-  color: grey;
+  color: rgb(10, 0, 0);
 }
 
 
