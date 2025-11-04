@@ -1,14 +1,10 @@
-<<<<<<< HEAD
 /* ✅ FINAL Navbar.css — No design changes, only logic fixes */
 
-=======
 /* NAVBAR BASE */
->>>>>>> 7d73894 (icon change)
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
   background-color: #000;
   padding: 0rem 1.5rem 0rem 1.5rem;
   position: fixed;
@@ -19,13 +15,6 @@
   border-bottom: 2px solid goldenrod;
   box-sizing: border-box;
   max-width: 100vw;
-=======
-  background-color: #000; /* Black background */
-  padding: 15px 50px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
->>>>>>> 7d73894 (icon change)
 }
 
 /* LOGO SECTION */
@@ -49,60 +38,38 @@
 }
 
 .main-title {
-<<<<<<< HEAD
   font-size: 1.3rem;
   font-weight: 800;
   color: #d4af37;
   text-transform: uppercase;
-=======
-  color: #FFD700; /* Golden yellow */
-  font-size: 1.3rem;
-  font-weight: 700;
->>>>>>> 7d73894 (icon change)
   margin: 0;
 }
 
 .sub-title {
-<<<<<<< HEAD
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #d4af37;
-=======
-  color: #FFD700; /* Yellow text */
+  color: #ffd700; /* Yellow text */
   font-size: 0.9rem;
->>>>>>> 7d73894 (icon change)
   letter-spacing: 1px;
   margin: 0;
-  font-weight: 600;
+  font-weight: 800;
 }
 
-
 .tagline {
-<<<<<<< HEAD
   font-size: 0.85rem;
   font-weight: 600;
-  color: #d4af37;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-=======
-  color: #FFD700;
-  font-size: 0.8rem;
->>>>>>> 7d73894 (icon change)
+  color: #ffd700;
   margin-top: 4px;
   font-weight: 500;
 }
 
-<<<<<<< HEAD
 /* ✅ Desktop menu */
-=======
 /* NAV LINKS */
->>>>>>> 7d73894 (icon change)
 .navbar-links {
   display: flex;
   list-style: none;
   gap: 30px;
   margin: 0;
-<<<<<<< HEAD
   transition: all 0.3s ease;
 }
 
@@ -182,66 +149,4 @@
 /* ✅ No horizontal scroll */
 body {
   overflow-x: hidden;
-=======
-  padding: 0;
-}
-
-.navbar-links li a {
-  text-decoration: none;
-  color: #FFD700; /* Yellow font */
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.navbar-links li a:hover {
-  color: #d4af37; /* Slightly darker gold */
-  transform: scale(1.05);
-}
-
-/* HAMBURGER MENU (for small screens) */
-.menu-icon {
-  display: none;
-  font-size: 1.8rem;
-  color: #FFD700;
-  cursor: pointer;
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 900px) {
-  .navbar {
-    padding: 15px 25px;
-  }
-
-  .navbar-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100vh;
-    background-color: #111;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    transition: right 0.4s ease;
-  }
-
-  .navbar-links.active {
-    right: 0;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 2rem;
-    color: #FFD700;
-    cursor: pointer;
-  }
->>>>>>> 7d73894 (icon change)
 }

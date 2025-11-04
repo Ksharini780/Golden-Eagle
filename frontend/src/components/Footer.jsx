@@ -1,6 +1,11 @@
 import React from "react";
 import "./Footer.css";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -8,10 +13,14 @@ const Footer = () => {
       <div className="footer-top">
         {/* Logo Section */}
         <div className="footer-logo">
-          <img src="/logo.png" alt="Golden Eagle Logo" className="footer-logo-img" />
+          <img
+            src="/logo.png"
+            alt="Golden Eagle Logo"
+            className="footer-logo-img"
+          />
           <div>
             <h2>GOLDEN EAGLE SOLUTIONS</h2>
-             <p className="footer-tagline">EXCELLENCE IN EVERY TASK</p>
+            <p className="footer-tagline">EXCELLENCE IN EVERY TASK</p>
           </div>
         </div>
 
@@ -20,20 +29,36 @@ const Footer = () => {
           <div>
             <h4>Company</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li>
+                <a href="/services">Services</a>
+              </li>
+              <li>
+                <a href="/contact">Contact</a>
+              </li>
             </ul>
           </div>
 
           <div>
             <h4>Support</h4>
             <ul>
-              <li><a href="/faq">FAQ</a></li>
-              <li><a href="/feedback">Feedback</a></li>
-              <li><a href="/terms">Terms</a></li>
-              <li><a href="/privacy">Privacy</a></li>
+              <li>
+                <a href="/faq">FAQ</a>
+              </li>
+              <li>
+                <a href="/feedback">Feedback</a>
+              </li>
+              <li>
+                <a href="/terms">Terms</a>
+              </li>
+              <li>
+                <a href="/privacy">Privacy</a>
+              </li>
             </ul>
           </div>
 
@@ -53,13 +78,22 @@ const Footer = () => {
       {/* Social + Bottom Section */}
       <div className="footer-bottom">
         <div className="social-icons">
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaTwitter /></a>
-          <a href="#"><FaInstagram /></a>
-          <a href="#"><FaLinkedinIn /></a>
+          <a href="#">
+            <FaFacebookF />
+          </a>
+          <a href="#">
+            <FaTwitter />
+          </a>
+          <a href="#">
+            <FaInstagram />
+          </a>
+          <a href="#">
+            <FaLinkedinIn />
+          </a>
         </div>
         <p>
-          © {new Date().getFullYear()} Golden Eagle Cleaning Solution Pte. Ltd. — All Rights Reserved.
+          © {new Date().getFullYear()} Golden Eagle Cleaning Solution Pte. Ltd.
+          — All Rights Reserved.
         </p>
       </div>
     </footer>
