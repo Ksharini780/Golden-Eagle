@@ -1,4 +1,4 @@
-// Updated Home.jsx with BookNow form injected below Affordable Pricing section
+// Updated Home.jsx with Intro section added
 import React from "react";
 import BookNow from "./BookNow";
 
@@ -46,6 +46,36 @@ function Home() {
         </div>
       </div>
 
+      {/* ✅ Company Intro Section */}
+      <div className="mt-20 max-w-xl p-3 text-center px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gold mb-6">
+          Your Trusted Cleaning Partner in Singapore
+        </h2>
+
+        <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
+          Golden Eagle Cleaning Solution delivers{" "}
+          <span className="text-gold font-semibold">
+            professional, reliable, and high-quality
+          </span>
+          cleaning services across Singapore — ensuring spotless, safe, and
+          hygienic environments.
+        </p>
+
+        <p className="text-gray-400 mt-4 text-base md:text-lg">
+          From commercial offices and residential properties to industrial and
+          marine facilities, our experienced team ensures excellence, trust, and
+          consistency in every task.
+        </p>
+
+        <div className="mt-6 text-gray-300 text-base md:text-lg">
+          ✅ Office & commercial cleaning <br />
+          ✅ Residential & condominium cleaning <br />
+          ✅ Industrial & marine facility maintenance <br />✅ Deep cleaning &
+          post-renovation care
+        </div>
+      </div>
+
+      {/* 3 Benefit Cards */}
       <div className="mt-20 grid md:grid-cols-3 gap-8 text-center">
         <div className="p-6 border border-gray-700 rounded-xl hover:border-gold transition">
           <h3 className="text-2xl font-semibold text-gold mb-2">
@@ -73,7 +103,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Book Now section here */}
+      {/* Book Now section */}
       <div
         id="booknow-section"
         className="mt-20 w-full flex justify-center mb-20"
