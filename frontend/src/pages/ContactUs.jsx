@@ -37,7 +37,7 @@ const ContactUs = () => {
 
           {/* Right Section - Message Form */}
           <div className="contact-form">
-            <h3>Message Us</h3>
+            <h3>Contact Us</h3>
             <form>
               <input type="text" placeholder="Full Name" required />
               <input type="email" placeholder="Email" required />

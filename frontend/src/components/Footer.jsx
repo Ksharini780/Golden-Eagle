@@ -11,7 +11,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-top">
-        {/* Logo Section */}
         <div className="footer-logo">
           <img
             src="/logo.png"
@@ -24,7 +23,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Links Section */}
         <div className="footer-links">
           <div>
             <h4>Company</h4>
@@ -62,7 +60,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="footer-contact">
             <h4>Connect</h4>
             <ul>
               <li>📍 603 Ang Mo Kio Ave 5</li>
@@ -75,19 +73,18 @@ const Footer = () => {
 
       <hr className="footer-divider" />
 
-      {/* Social + Bottom Section */}
       <div className="footer-bottom">
         <div className="social-icons">
-          <a href="#">
+          <a href="#" aria-label="Facebook">
             <FaFacebookF />
           </a>
-          <a href="#">
+          <a href="#" aria-label="Twitter">
             <FaTwitter />
           </a>
-          <a href="#">
+          <a href="#" aria-label="Instagram">
             <FaInstagram />
           </a>
-          <a href="#">
+          <a href="#" aria-label="LinkedIn">
             <FaLinkedinIn />
           </a>
         </div>

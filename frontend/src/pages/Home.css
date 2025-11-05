@@ -1,0 +1,168 @@
+/* Main container → flex layout */
+.home-cont {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.title-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 2rem 1rem;
+}
+.booknow-btn {
+  background-color: goldenrod;
+  color: white;
+  padding: 12px 26px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-block; /* ✅ allows proper centering */
+  width: auto; /* ✅ remove full width */
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
+}
+.btn-cont {
+  text-align: center;
+}
+
+/* Left and right content blocks */
+.title-sub-cont-1,
+.title-sub-cont-2 {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px; /* Good mobile fallback */
+}
+
+/* Center content in left block */
+.title-sub-cont-1 {
+  text-align: center;
+}
+
+/* Align text normally on right */
+.title-sub-cont-2 {
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 3rem;
+}
+.title-sub-cont-2 {
+  text-align: left;
+  padding: 20px;
+  padding-bottom: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  padding: 35px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+/* Logo control */
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Responsive → stack on small screens */
+@media (max-width: 768px) {
+  .title-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .title-sub-cont-2 {
+    text-align: center;
+  }
+}
+/* Center the container */
+.mid-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Control the image size */
+.mid-img img,
+.mid-img-el {
+  width: 60%;
+  height: 40%;
+  object-fit: contain; /* prevents stretching */
+}
+
+@media (min-width: 768px) {
+  .intro-cont {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+/* Center container like 8/12 with empty space on both sides */
+.intro-wrapper {
+  max-width: 100%; /* 8/12 grid equivalent */
+  width: 100%;
+}
+
+/* Under md = full width */
+@media (max-width: 768px) {
+  .intro-wrapper {
+    max-width: 100%;
+    margin: 1rem;
+  }
+}
+
+/* Point icon style */
+.point-icon {
+  font-size: 1.2rem;
+  color: #f4c542; /* gold tone */
+  line-height: 1.2;
+}
+
+/* Mid container: cards + form side by side */
+.mid-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5rem;
+  flex-wrap: wrap;
+  padding: 2rem 1rem;
+}
+
+/* Left = cards, Right = form */
+.mid-cont-1,
+.mid-cont-2 {
+  flex: 1;
+  min-width: 320px; /* ensures stacking on smaller screens */
+}
+
+/* Metallic Gold Section */
+.mid-cont-1 {
+  align-self: center;
+  background: linear-gradient(135deg, #a67c00, #d4af37, #8c6a00);
+  background-size: cover;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  max-width: 550px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Metallic texture overlay */
+.mid-cont-1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/gold-leaf.png");
+  opacity: 0.25; /* adjust shine intensity */
+  pointer-events: none;
+}
+
+/* Stack on tablets & phones */
+@media (max-width: 768px) {
+  .mid-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
