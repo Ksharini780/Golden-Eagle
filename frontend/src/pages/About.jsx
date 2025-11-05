@@ -9,7 +9,7 @@ function About() {
       <div className="about-header">
         <h1>About Us</h1>
         <p>
-          Discover more about <span>Golden Eagle  Solutions</span> — our mission,
+          Discover more about <span>Golden Eagle Solutions</span> — our mission,
           story, and the values that define us.
         </p>
       </div>
@@ -19,13 +19,15 @@ function About() {
         <div className="about-text">
           <h2>Our Mission</h2>
           <p>
-            At <span>Golden Eagle  Solutions </span>, our mission is to deliver
-            exceptional cleaning and maintenance services across Singapore. We aim to redefine
-            professionalism by combining efficiency, consistency, and trust.
+            At <span>Golden Eagle Solutions </span>, our mission is to deliver
+            exceptional cleaning and maintenance services across Singapore. We
+            aim to redefine professionalism by combining efficiency,
+            consistency, and trust.
           </p>
           <p>
-            We’re dedicated to maintaining spotless environments for our clients — whether it’s
-            residential, commercial, industrial, or marine spaces.
+            We’re dedicated to maintaining spotless environments for our clients
+            — whether it’s residential, commercial, industrial, or marine
+            spaces.
           </p>
         </div>
         <div className="about-image">
@@ -41,12 +43,14 @@ function About() {
         <div className="about-text">
           <h2>Our Story</h2>
           <p>
-            Established in Singapore, <span>Golden Eagle  Solutions </span> was built
-            with a simple vision — to create cleaner, safer, and more hygienic spaces for everyone.
+            Established in Singapore, <span>Golden Eagle Solutions </span> was
+            built with a simple vision — to create cleaner, safer, and more
+            hygienic spaces for everyone.
           </p>
           <p>
-            Over the years, we’ve become a trusted name in professional cleaning through our
-            attention to detail, commitment to customer satisfaction, and quality service delivery.
+            Over the years, we’ve become a trusted name in professional cleaning
+            through our attention to detail, commitment to customer
+            satisfaction, and quality service delivery.
           </p>
         </div>
       </div>
@@ -58,26 +62,27 @@ function About() {
           <div className="value-card">
             <h3>Excellence</h3>
             <p>
-              We go above and beyond to deliver superior cleaning quality every time.
+              We go above and beyond to deliver superior cleaning quality every
+              time.
             </p>
           </div>
           <div className="value-card">
             <h3>Integrity</h3>
             <p>
-              We operate with honesty, transparency, and a commitment to doing what’s right.
+              We operate with honesty, transparency, and a commitment to doing
+              what’s right.
             </p>
           </div>
           <div className="value-card">
             <h3>Reliability</h3>
             <p>
-              You can always count on us to deliver timely, consistent, and trusted service.
+              You can always count on us to deliver timely, consistent, and
+              trusted service.
             </p>
           </div>
         </div>
       </div>
-      <Footer />
     </section>
-    
   );
 }
 
