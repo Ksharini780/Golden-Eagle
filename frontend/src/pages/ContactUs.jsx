@@ -7,13 +7,15 @@ const ContactUs = () => {
     <>
       <div className="contact-page">
         <h1 className="contact-title">Get in Touch</h1>
+
         <p className="contact-description">
-          We at <strong className="golden-text">Golden Eagle Solutions </strong>{" "}
-          are dedicated to delivered <br></br>exceptional cleaning and
-          maintenance services for commercial, industrial,<br></br> and marine
-          environments across Singapore Today.
+          We at <strong className="golden-text">Golden Eagle Solutions</strong>{" "}
+          are dedicated to delivering exceptional cleaning and maintenance
+          services for commercial, industrial, and marine environments across
+          Singapore today.
         </p>
 
+        {/* Main Contact Flex Container */}
         <div className="contact-container">
           {/* Left Section */}
           <div className="contact-info">
@@ -35,9 +37,10 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* Right Section - Message Form */}
+          {/* Right Section - Form */}
           <div className="contact-form">
             <h3>Message Us</h3>
+
             <form>
               <input type="text" placeholder="Full Name" required />
               <input type="email" placeholder="Email" required />

@@ -97,6 +97,7 @@ const useHeavyCaptcha = () => {
 
   useEffect(() => {
     refreshCaptcha();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { captchaCode, canvasRef, refreshCaptcha };
@@ -154,11 +155,12 @@ function Home() {
       [key]: !prev[key],
     }));
 
-    if (selectedTop[key]) {
-      if (key === "cleaning")
-        setFormData((p) => ({ ...p, cleaningSubService: "" }));
-      if (key === "marine")
-        setFormData((p) => ({ ...p, marineSubService: "" }));
+    // reset dependent select when toggled off
+    if (key === "cleaning" && selectedTop.cleaning) {
+      setFormData((p) => ({ ...p, cleaningSubService: "" }));
+    }
+    if (key === "marine" && selectedTop.marine) {
+      setFormData((p) => ({ ...p, marineSubService: "" }));
     }
   };
 
@@ -278,7 +280,7 @@ function Home() {
 
       <div className="mt-10 mid-img">
         <img
-          src="/cleaning-team.png"
+          src="/home-img.jpg"
           alt="Golden Eagle Cleaning Team"
           className="rounded-xl shadow-lg mx-auto mid-img-el"
         />
@@ -329,7 +331,7 @@ function Home() {
       <div className="mid-container">
         {/* Service cards */}
         <div className="mid-cont-1">
-          <div className="mt-20 grid md:grid-cols-3 gap-8 text-center">
+          <div className=" grid md:grid-cols-3 gap-8 text-center">
             <div className="p-6 rounded-xl hover:border-gold transition">
               <h3 className="text-2xl font-semibold text-gold mb-2">
                 Professional Staff
@@ -363,14 +365,14 @@ function Home() {
         <div className="mid-cont-2">
           <div
             id="booknow-section"
-            className="mt-20 w-full flex justify-center mb-20"
+            className="mt-20 w-full flex justify-center mb-20 px-4 md:px-6"
           >
             <div className="booknow-container">
               <h2 className="booknow-title">Book a Service</h2>
 
               <form className="booknow-form" onSubmit={handleSubmit}>
                 {/* Name */}
-                <div className="form-group">
+                <div className="form-group-left">
                   <label>Name:</label>
                   <input
                     type="text"
@@ -383,7 +385,7 @@ function Home() {
                 </div>
 
                 {/* Email */}
-                <div className="form-group">
+                <div className="form-group-left">
                   <label>Email:</label>
                   <input
                     type="email"
@@ -396,7 +398,7 @@ function Home() {
                 </div>
 
                 {/* Phone */}
-                <div className="form-group">
+                <div className="form-group-left">
                   <label>Phone:</label>
                   <div className="phone-wrapper">
                     <select
@@ -450,7 +452,7 @@ function Home() {
 
                 {/* Cleaning dropdown */}
                 {selectedTop.cleaning && (
-                  <div className="form-group">
+                  <div className="form-group-left">
                     <label>Cleaning - Select service:</label>
                     <select
                       name="cleaningSubService"
@@ -470,7 +472,7 @@ function Home() {
 
                 {/* Marine dropdown */}
                 {selectedTop.marine && (
-                  <div className="form-group">
+                  <div className="form-group-left">
                     <label>Marine & Construction - Select service:</label>
                     <select
                       name="marineSubService"
@@ -489,7 +491,7 @@ function Home() {
                 )}
 
                 {/* Message */}
-                <div className="form-group">
+                <div className="form-group-left">
                   <label>Message:</label>
                   <textarea
                     name="message"
@@ -516,15 +518,16 @@ function Home() {
                       ↻
                     </button>
                   </div>
-
-                  <input
-                    type="text"
-                    className="captcha-input"
-                    placeholder="Enter captcha text"
-                    value={captchaInput}
-                    onChange={(e) => setCaptchaInput(e.target.value)}
-                    required
-                  />
+                  <div className="captcha-field">
+                    <input
+                      type="text"
+                      className="captcha-input"
+                      placeholder="Enter captcha text"
+                      value={captchaInput}
+                      onChange={(e) => setCaptchaInput(e.target.value)}
+                      required
+                    />
+                  </div>
 
                   {captchaError && (
                     <p className="captcha-error">{captchaError}</p>

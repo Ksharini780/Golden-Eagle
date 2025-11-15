@@ -62,11 +62,6 @@ function Navbar() {
             Contact
           </Link>
         </li>
-        <li>
-          <Link to="/reviews" onClick={closeMenu}>
-            Reviews
-          </Link>
-        </li>
       </ul>
     </nav>
   );

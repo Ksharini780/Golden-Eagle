@@ -1,44 +1,38 @@
+/* BOOK NOW container - always centered, responsive */
 .booknow-container {
-  max-width: 600px;
-  /* margin: 20px auto; */
-  padding: 10px 50px 20px 50px;
+  width: 100%;
+  max-width: 520px; /* matches mid-cont-1 max width for visual balance */
+  margin: 0 auto; /* center horizontally */
+  box-sizing: border-box;
+  padding: 16px 28px;
   background-color: transparent;
   border: 2px solid goldenrod;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(218, 165, 32, 0.3);
-  width: 80%;
 }
 
-/* ✅ Responsive width scaling */
+/* responsive scalings are kept but now container centers itself */
 @media (min-width: 600px) {
   .booknow-container {
-    width: 85%;
-    max-width: 450px;
-  }
-}
-@media (min-width: 768px) {
-  .booknow-container {
-    width: 80%;
-    max-width: 520px;
+    padding: 18px 36px;
+    /* max-width: 520px; */
   }
 }
 @media (min-width: 992px) {
   .booknow-container {
-    width: 80%;
-    max-width: 600px;
+    /* max-width: 600px; */
   }
 }
 @media (min-width: 1200px) {
   .booknow-container {
-    width: 80%;
-    max-width: 650px;
+    /* max-width: 650px; */
   }
 }
 
 .booknow-title {
   text-align: center;
   color: goldenrod;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
   font-size: 28px;
   text-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
@@ -46,15 +40,19 @@
 .booknow-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: 95%;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* the generic form-group keeps previous behaviour */
 .form-group {
   display: flex;
   align-items: center;
+  text-align: left;
   flex-direction: column;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group label {
@@ -67,35 +65,32 @@
   display: block;
 }
 
+/* inputs default styling */
 .booknow-form input,
 .booknow-form textarea,
 .booknow-form select {
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: 2px solid goldenrod;
   border-radius: 8px;
   outline: none;
   font-size: 16px;
   color: black;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(218, 165, 32, 0.35);
+  transition: all 0.2s ease;
 }
 
 .booknow-form input::placeholder {
   color: rgb(104, 96, 96);
 }
 
-.booknow-form select {
-  color: rgb(10, 0, 0);
-}
-
 .booknow-form input:focus,
 .booknow-form textarea:focus,
 .booknow-form select:focus,
 .booknow-form .phone-wrapper:focus-within {
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.6);
   border-color: gold;
 }
 
@@ -107,7 +102,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: #f3f2f2;
-  box-shadow: 0 0 8px rgba(218, 165, 32, 0.3);
+  box-shadow: 0 0 8px rgba(218, 165, 32, 0.25);
 }
 
 .phone-wrapper select {
@@ -130,9 +125,11 @@
   color: black;
 }
 
+/* toggles */
 .top-toggle-row {
   display: flex;
   gap: 12px;
+  justify-content: center;
 }
 
 .top-toggle {
@@ -144,10 +141,6 @@
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
-}
-
-.top-toggle:hover {
-  transform: translateY(-2px);
 }
 
 .top-toggle.active {
@@ -178,6 +171,98 @@
   background-color: #e2b616;
 }
 
+/* Captcha box and redo button */
+.captcha-box {
+  position: relative;
+  display: inline-block;
+  margin: 8px auto 0; /* keep canvas centered by default */
+}
+
+.captcha-canvas {
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 150px;
+  height: 50px;
+}
+
+/* top-right redo button */
+.captcha-redo-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: gold;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  padding: 6px 9px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 5px gold;
+  transition: 0.2s ease;
+}
+.captcha-redo-btn:hover {
+  transform: rotate(90deg);
+}
+
+/* Entire captcha block aligns left for label/input pairing, but the canvas remains centered */
+.captcha-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left; /* ensure label aligns left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* The field containing input only */
+.captcha-field {
+  width: 50%; /* you wanted 40% earlier; using 50% for a balanced look - change to 40% if desired */
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.captcha-input {
+  width: 100%;
+  max-width: 240px;
+  text-align: left;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* error */
+.captcha-error {
+  color: #ff3b3b;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* Force all left-aligned form groups (only those with .form-group-left) */
+.booknow-form .form-group-left {
+  width: 100%;
+  text-align: left !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+}
+
+.booknow-form .form-group-left label {
+  text-align: left !important;
+  width: 100%;
+  margin-left: 0;
+}
+
+.booknow-form .form-group-left input,
+.booknow-form .form-group-left textarea,
+.booknow-form .form-group-left select {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* small screens adjustments */
 @media (max-width: 480px) {
   .top-toggle-row {
     flex-direction: column;
@@ -185,27 +270,7 @@
   .phone-wrapper select {
     width: 90px;
   }
-}
-.captcha-box {
-  position: relative;
-  display: inline-block;
-}
-
-.captcha-redo-btn {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: gold;
-  color: black;
-  border: none;
-  border-radius: 50%;
-  padding: 4px 7px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 0 5px gold;
-  transition: 0.2s ease;
-}
-
-.captcha-redo-btn:hover {
-  transform: rotate(90deg);
+  .captcha-field {
+    width: 100%;
+  }
 }

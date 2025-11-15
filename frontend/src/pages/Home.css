@@ -1,8 +1,11 @@
-/* Main container → flex layout */
+/* Main container → keep centered padding instead of large fixed margins */
 .home-cont {
-  margin-left: 50px;
-  margin-right: 50px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
 }
+
+/* Title layout */
 .title-container {
   display: flex;
   justify-content: space-evenly;
@@ -11,6 +14,8 @@
   flex-wrap: wrap;
   padding: 2rem 1rem;
 }
+
+/* Button style */
 .booknow-btn {
   background-color: goldenrod;
   color: white;
@@ -20,8 +25,8 @@
   border: none;
   font-weight: 700;
   cursor: pointer;
-  display: inline-block; /* ✅ allows proper centering */
-  width: auto; /* ✅ remove full width */
+  display: inline-block;
+  width: auto;
   box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
 }
 .btn-cont {
@@ -33,7 +38,7 @@
 .title-sub-cont-2 {
   flex: 1;
   min-width: 320px;
-  max-width: 500px; /* Good mobile fallback */
+  max-width: 500px;
 }
 
 /* Center content in left block */
@@ -41,20 +46,13 @@
   text-align: center;
 }
 
-/* Align text normally on right */
-.title-sub-cont-2 {
-  text-align: center;
-  padding: 20px;
-  padding-bottom: 3rem;
-}
+/* Right block visual */
 .title-sub-cont-2 {
   text-align: left;
-  padding: 20px;
-  padding-bottom: 3rem;
+  padding: 35px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 215, 0, 0.2);
   border-radius: 14px;
-  padding: 35px;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
   transition: 0.3s ease;
 }
@@ -77,34 +75,35 @@
     text-align: center;
   }
 }
-/* Center the container */
+
+/* Center the container image */
 .mid-img {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-/* Control the image size */
 .mid-img img,
 .mid-img-el {
   width: 60%;
-  height: 40%;
-  object-fit: contain; /* prevents stretching */
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
+/* Intro layout */
 @media (min-width: 768px) {
   .intro-cont {
     margin-left: 10%;
     margin-right: 10%;
   }
 }
-/* Center container like 8/12 with empty space on both sides */
 .intro-wrapper {
-  max-width: 100%; /* 8/12 grid equivalent */
+  max-width: 100%;
   width: 100%;
 }
-
-/* Under md = full width */
 @media (max-width: 768px) {
   .intro-wrapper {
     max-width: 100%;
@@ -115,28 +114,34 @@
 /* Point icon style */
 .point-icon {
   font-size: 1.2rem;
-  color: #f4c542; /* gold tone */
+  color: #f4c542;
   line-height: 1.2;
 }
 
-/* Mid container: cards + form side by side */
+/* Mid container */
 .mid-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* center both children horizontally */
   align-items: flex-start;
-  gap: 5rem;
+  gap: 3rem;
   flex-wrap: wrap;
   padding: 2rem 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Left = cards, Right = form */
 .mid-cont-1,
 .mid-cont-2 {
-  flex: 1;
-  min-width: 320px; /* ensures stacking on smaller screens */
+  flex: 1 1 320px;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
-/* Metallic Gold Section */
+/* -------------- 🔥 YOUR mid-cont-1 EXACTLY INSERTED 🔥 -------------- */
+
 .mid-cont-1 {
   align-self: center;
   background: linear-gradient(135deg, #a67c00, #d4af37, #8c6a00);
@@ -155,14 +160,32 @@
   position: absolute;
   inset: 0;
   background-image: url("https://www.transparenttextures.com/patterns/gold-leaf.png");
-  opacity: 0.25; /* adjust shine intensity */
+  opacity: 0.25;
   pointer-events: none;
 }
 
-/* Stack on tablets & phones */
+/* -------------- END OF YOUR mid-cont-1 -------------- */
+
+/* mid-cont-2 (booknow form) */
+.mid-cont-2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Stack on tablets & mobiles */
 @media (max-width: 768px) {
   .mid-container {
     flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
+  }
+  .mid-cont-1,
+  .mid-cont-2 {
+    max-width: 100%;
+    margin: 0 auto;
   }
 }
