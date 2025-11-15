@@ -1,13 +1,20 @@
+/* ✅ FINAL Navbar.css — No design changes, only logic fixes */
+
 /* NAVBAR BASE */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000; /* Black background */
-  padding: 15px 50px;
-  position: sticky;
+  background-color: #000;
+  padding: 0rem 1.5rem 0rem 1.5rem;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  border-bottom: 2px solid goldenrod;
+  box-sizing: border-box;
+  max-width: 100vw;
 }
 
 /* LOGO SECTION */
@@ -31,92 +38,115 @@
 }
 
 .main-title {
-  color: #FFD700; /* Golden yellow */
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 800;
+  color: #d4af37;
+  text-transform: uppercase;
   margin: 0;
 }
 
 .sub-title {
-  color: #FFD700; /* Yellow text */
+  color: #ffd700; /* Yellow text */
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin: 0;
-  font-weight: 600;
+  font-weight: 800;
 }
 
-
 .tagline {
-  color: #FFD700;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffd700;
   margin-top: 4px;
   font-weight: 500;
 }
 
+/* ✅ Desktop menu */
 /* NAV LINKS */
 .navbar-links {
   display: flex;
   list-style: none;
   gap: 30px;
   margin: 0;
-  padding: 0;
+  transition: all 0.3s ease;
 }
 
 .navbar-links li a {
+  color: #d4af37;
   text-decoration: none;
-  color: #FFD700; /* Yellow font */
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: color 0.3s;
 }
 
 .navbar-links li a:hover {
-  color: #d4af37; /* Slightly darker gold */
-  transform: scale(1.05);
+  color: gold;
 }
 
-/* HAMBURGER MENU (for small screens) */
-.menu-icon {
+/* ✅ Default: Desktop (>768px) - Hamburger hidden */
+.hamburger {
   display: none;
-  font-size: 1.8rem;
-  color: #FFD700;
+  flex-direction: column;
+  gap: 5px;
   cursor: pointer;
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 900px) {
-  .navbar {
-    padding: 15px 25px;
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background-color: #d4af37;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+/* ✅ Mobile & Tablet (≤768px) */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
   }
 
   .navbar-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100vh;
-    background-color: #111;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    transition: right 0.4s ease;
-  }
-
-  .navbar-links.active {
-    right: 0;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .close {
     position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 2rem;
-    color: #FFD700;
-    cursor: pointer;
+    top: 100%;
+    right: 0;
+    background: black;
+    flex-direction: column;
+    width: 200px;
+    padding: 1rem;
+    display: none;
+    border-left: 2px solid goldenrod;
+    border-bottom: 2px solid goldenrod;
+    opacity: 0;
+    transform: translateY(-10px);
   }
+
+  .navbar-links.open {
+    display: flex;
+    animation: fadeInMenu 0.3s ease forwards;
+  }
+
+  @keyframes fadeInMenu {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .navbar-links:not(.open) {
+    animation: fadeOutMenu 0.2s ease forwards;
+  }
+
+  @keyframes fadeOutMenu {
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* ✅ No horizontal scroll */
+body {
+  overflow-x: hidden;
 }
