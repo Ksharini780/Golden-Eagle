@@ -1,50 +1,48 @@
-import Booking from "../models/Booking.js";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-export const createBooking = async (req, res) => {
+dotenv.config();
+
+export const submitBooking = async (req, res) => {
+  const { name, email, phone, services, message } = req.body; // FIXED HERE
+
   try {
-    const { name, number, address, serviceType } = req.body;
-
-    const booking = new Booking({
-      userId: null,
-      serviceId: null,
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-      address,
-      status: "Pending"
-    });
-
-    await booking.save();
-
-    // Send Email to Owner
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true,
       auth: {
-        user: process.env.OWNER_EMAIL,
-        pass: process.env.OWNER_EMAIL_PASS
-      }
+        user: process.env.SENDER_EMAIL,
+        pass: process.env.APP_PASSWORD,
+      },
     });
 
-    const mailOptions = {
-      from: process.env.OWNER_EMAIL,
-      to: process.env.OWNER_EMAIL,
-      subject: "New Cleaning Service Booking",
-      text: `
-New booking received:
+    const admins = [
+      process.env.ADMIN_EMAIL_1,
+      process.env.ADMIN_EMAIL_2,
+      process.env.ADMIN_EMAIL_3,
+    ];
 
-Name: ${name}
-Phone: ${number}
-Address: ${address}
-Service Type: ${serviceType}
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to: admins,
+      subject: "New Booking Request",
+      html: `
+        <h3>New Booking Details</h3>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Services:</b> ${services?.join(", ")}</p>
+        <p><b>Message:</b> ${message || "No additional message"}</p>
+      `,
+    });
 
-Please contact the user to confirm the booking.
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    res.json({ message: "Booking successful! Owner has been notified via email." });
-  } catch (err) {
-    res.status(500).json({ message: "Booking failed", error: err.message });
+    return res.json({
+      success: true,
+      message: "Booking submitted successfully",
+    });
+  } catch (error) {
+    console.log("Email Error:", error);
+    return res.status(500).json({ success: false, message: "Email failed" });
   }
 };

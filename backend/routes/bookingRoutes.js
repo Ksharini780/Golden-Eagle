@@ -1,8 +1,11 @@
 import express from "express";
-import { createBooking } from "../controllers/bookingController.js";
+import { submitBooking } from "../controllers/bookingController.js";
 
 const router = express.Router();
 
-router.post("/", createBooking);
+router.post("/submit", (req, res) => {
+  console.log("BOOKING RECEIVED:", req.body);
+  res.status(200).json({ success: true });
+});
 
 export default router;

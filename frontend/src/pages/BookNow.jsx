@@ -51,68 +51,85 @@ const BookNow = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!selectedTop.cleaning && !selectedTop.marine) {
-      alert(
-        "Please choose at least one service category (Cleaning or Marine & Construction)."
-      );
-      return;
-    }
-    if (selectedTop.cleaning && !formData.cleaningSubService) {
-      alert("Please select a Cleaning sub-service.");
-      return;
-    }
-    if (selectedTop.marine && !formData.marineSubService) {
-      alert("Please select a Marine & Construction sub-service.");
-      return;
-    }
-    if (!formData.name || !formData.email || !formData.phone) {
-      alert("Please fill in name, email and phone before submitting.");
-      return;
-    }
+  if (!selectedTop.cleaning && !selectedTop.marine) {
+    alert("Please choose at least one service category.");
+    return;
+  }
+  if (selectedTop.cleaning && !formData.cleaningSubService) {
+    alert("Please select a Cleaning sub-service.");
+    return;
+  }
+  if (selectedTop.marine && !formData.marineSubService) {
+    alert("Please select a Marine & Construction sub-service.");
+    return;
+  }
+  if (!formData.name || !formData.email || !formData.phone) {
+    alert("Please fill required fields.");
+    return;
+  }
 
-    const chosen = [];
-    if (selectedTop.cleaning) {
-      chosen.push(
-        `Cleaning: ${
-          cleaningOptions.find((o) => o.value === formData.cleaningSubService)
-            ?.label || formData.cleaningSubService
-        }`
-      );
-    }
-    if (selectedTop.marine) {
-      chosen.push(
-        `Marine & Construction: ${
-          marineOptions.find((o) => o.value === formData.marineSubService)
-            ?.label || formData.marineSubService
-        }`
-      );
-    }
+  const chosen = [];
+  if (selectedTop.cleaning) {
+    chosen.push(
+      `Cleaning: ${
+        cleaningOptions.find((o) => o.value === formData.cleaningSubService)
+          ?.label
+      }`
+    );
+  }
+  if (selectedTop.marine) {
+    chosen.push(
+      `Marine & Construction: ${
+        marineOptions.find((o) => o.value === formData.marineSubService)
+          ?.label
+      }`
+    );
+  }
 
-    const payload = {
-      name: formData.name,
-      email: formData.email,
-      phone: `${formData.countryCode} ${formData.phone}`,
-      services: chosen,
-      message: formData.message,
-    };
-
-    console.log("Submitting booking:", payload);
-    alert(`Thank you, ${formData.name}! Your booking has been received.`);
-
-    setFormData({
-      name: "",
-      email: "",
-      countryCode: "+65",
-      phone: "",
-      cleaningSubService: "",
-      marineSubService: "",
-      message: "",
-    });
-    setSelectedTop({ cleaning: false, marine: false });
+  const payload = {
+    name: formData.name,
+    email: formData.email,
+    phone: `${formData.countryCode} ${formData.phone}`,
+    services: chosen,
+    message: formData.message,
   };
+
+  try {
+    
+    const res = await fetch("http://localhost:5000/api/book/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Booking submitted successfully! We will contact you soon.");
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  } catch (error) {
+    alert("Server error. Please try again later.");
+  }
+
+  setFormData({
+    name: "",
+    email: "",
+    countryCode: "+65",
+    phone: "",
+    cleaningSubService: "",
+    marineSubService: "",
+    message: "",
+  });
+  setSelectedTop({ cleaning: false, marine: false });
+};
+
 
   return (
     <div className="booknow-container">
