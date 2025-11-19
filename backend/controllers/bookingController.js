@@ -1,48 +1,93 @@
+// Golden-Eagle/backend/controllers/bookingController.js
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-
 dotenv.config();
 
+const {
+	SENDER_EMAIL,
+	SENDER_APP_PASSWORD,
+	OWNER_EMAIL,
+	SITE_NAME = "Golden Eagle",
+} = process.env;
+
+/**
+ * submitBooking - expects JSON body:
+ * { name, email, phone, services (array or string), message }
+ *
+ * Sends an email to OWNER_EMAIL with Reply-To set to user's email.
+ */
 export const submitBooking = async (req, res) => {
-  const { name, email, phone, services, message } = req.body; // FIXED HERE
+	try {
+		const { name, email, phone, services, message } = req.body;
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SENDER_EMAIL,
-        pass: process.env.APP_PASSWORD,
-      },
-    });
+		// Basic validation
+		if (!name || !email || !phone) {
+			return res.status(400).json({
+				success: false,
+				message: "name, email and phone are required.",
+			});
+		}
 
-    const admins = [
-      process.env.ADMIN_EMAIL_1,
-      process.env.ADMIN_EMAIL_2,
-      process.env.ADMIN_EMAIL_3,
-    ];
+		// Prepare chosen services string
+		const servicesText = Array.isArray(services)
+			? services.join(", ")
+			: String(services || "Not provided");
 
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: admins,
-      subject: "New Booking Request",
-      html: `
-        <h3>New Booking Details</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Services:</b> ${services?.join(", ")}</p>
-        <p><b>Message:</b> ${message || "No additional message"}</p>
-      `,
-    });
+		// Create transporter for Gmail (App Password)
+		const transporter = nodemailer.createTransport({
+			service: "gmail",
+			auth: {
+				user: SENDER_EMAIL,
+				pass: SENDER_APP_PASSWORD,
+			},
+		});
 
-    return res.json({
-      success: true,
-      message: "Booking submitted successfully",
-    });
-  } catch (error) {
-    console.log("Email Error:", error);
-    return res.status(500).json({ success: false, message: "Email failed" });
-  }
+		// Owner email content
+		const ownerMail = {
+			from: `"${SITE_NAME} Website" <${SENDER_EMAIL}>`,
+			to: OWNER_EMAIL,
+			replyTo: email, // IMPORTANT: Replying to the owner will reply to the user
+			subject: `New booking request from ${name}`,
+			text: `New booking request
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Services: ${servicesText}
+Message: ${message || "No additional message"}
+-- This email was sent from your website contact form.`,
+			html: `<h3>New booking request</h3>
+<p><strong>Name:</strong> ${name}</p>
+<p><strong>Email:</strong> ${email}</p>
+<p><strong>Phone:</strong> ${phone}</p>
+<p><strong>Services:</strong> ${servicesText}</p>
+<p><strong>Message:</strong> ${message || "No additional message"}</p>
+<hr/>
+<p><small>This email was sent from your website contact form.</small></p>`,
+		};
+
+		// Send to owner
+		await transporter.sendMail(ownerMail);
+
+		// Optional: send a confirmation email to the user (commented by default)
+		// Uncomment the block below if you want to auto-confirm to customer.
+
+		await transporter.sendMail({
+			from: `"${SITE_NAME}" <${SENDER_EMAIL}>`,
+			to: email,
+			subject: `We received your booking request — ${SITE_NAME}`,
+			text: `Hi ${name},\n\nThanks for contacting ${SITE_NAME}. We received your request and will be in touch soon.\n\n-- ${SITE_NAME}`,
+		});
+
+		return res.json({
+			success: true,
+			message: "Booking submitted successfully.",
+		});
+	} catch (err) {
+		console.error("submitBooking error:", err);
+		return res.status(500).json({
+			success: false,
+			message: "Failed to send booking email.",
+			error: err.message,
+		});
+	}
 };
