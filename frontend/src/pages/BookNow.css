@@ -165,7 +165,8 @@
 .captcha-box {
 	position: relative;
 	display: inline-block;
-	margin: 8px auto 0; /* keep canvas centered by default */
+	margin: 8px 0 0; /* remove auto horizontal margin since align-self will center it */
+	align-self: center; /* <--- center this child inside the flex column */
 }
 
 .captcha-canvas {
@@ -205,12 +206,13 @@
 	align-items: flex-start;
 }
 
-/* The field containing input only */
+/* center the input under the canvas */
 .captcha-field {
-	width: 50%; /* you wanted 40% earlier; using 50% for a balanced look - change to 40% if desired */
+	width: 50%; /* keep your chosen width */
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center; /* center the input horizontally inside this field */
 	margin-top: 8px;
+	align-self: center; /* <--- center this child inside the flex column */
 }
 
 .captcha-input {

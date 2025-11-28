@@ -320,20 +320,20 @@ function Home() {
 					</h2>
 
 					<p className="text-gray-300 text-lg md:text-xl test-justify leading-relaxed">
-						Golden Eagle Cleaning Solution delivers professional, reliable, and
+						Golden Eagle Solutions delivers professional, reliable, and
 						high-quality cleaning services across Singapore — ensuring spotless,
 						safe, and hygienic environments. From commercial offices and
 						residential properties to industrial and marine facilities, our
 						experienced team ensures excellence, trust, and consistency in every
 						task. <br />
 						<br />
-						Golden Eagle Cleaning Solution, a professional cleaning company
-						based in Singapore. We specialize in providing high-quality cleaning
-						services for residential, commercial, and industrial properties. At
-						Golden Eagle solutions, we believe in delivering excellence,
-						reliability, and trust in every service we provide. Our trained
-						cleaning team ensures that your premises remain spotless, hygienic,
-						and well-maintained — allowing you to focus on what matters most.
+						Golden Eagle Solutions, a professional cleaning company based in
+						Singapore. We specialize in providing high-quality cleaning services
+						for residential, commercial, and industrial properties. At Golden
+						Eagle solutions, we believe in delivering excellence, reliability,
+						and trust in every service we provide. Our trained cleaning team
+						ensures that your premises remain spotless, hygienic, and
+						well-maintained — allowing you to focus on what matters most.
 						<br />
 					</p>
 

@@ -6,20 +6,39 @@ dotenv.config();
 const {
 	SENDER_EMAIL,
 	SENDER_APP_PASSWORD,
-	OWNER_EMAIL,
+	OWNER_EMAIL_BOOKING,
+	OWNER_EMAIL, // fallback if still present
 	SITE_NAME = "Golden Eagle",
 } = process.env;
 
-// Convert multiple owner emails into an array
-// Example in .env:
-// OWNER_EMAIL=info@domain.com,accounts@domain.com
-const ownerList = OWNER_EMAIL.split(",").map((e) => e.trim());
+// --------------------------------------------
+// Reuse transporter to avoid recreating it every request
+// --------------------------------------------
+const transporter = nodemailer.createTransport({
+	host: "smtp.hostinger.com",
+	port: 465,
+	secure: true, // SSL
+	auth: {
+		user: SENDER_EMAIL,
+		pass: SENDER_APP_PASSWORD,
+	},
+});
+
+// Resolve booking owners: prefer OWNER_EMAIL_BOOKING, fallback to OWNER_EMAIL
+const bookingOwnerRaw = OWNER_EMAIL_BOOKING || OWNER_EMAIL || "";
+const bookingOwnerList = bookingOwnerRaw
+	? bookingOwnerRaw
+			.split(",")
+			.map((e) => e.trim())
+			.filter(Boolean)
+	: [];
 
 /**
  * submitBooking - expects JSON body:
  * { name, email, phone, services (array or string), message }
  *
- * Sends an email to OWNER_EMAIL(s) with Reply-To set to user's email.
+ * Sends an email to booking owner(s) with Reply-To set to user's email.
+ * Sends confirmation email to user asynchronously.
  */
 export const submitBooking = async (req, res) => {
 	try {
@@ -39,22 +58,11 @@ export const submitBooking = async (req, res) => {
 			: String(services || "Not provided");
 
 		// --------------------------------------------
-		// ✅ Hostinger SMTP Transporter
+		// Owner email content
 		// --------------------------------------------
-		const transporter = nodemailer.createTransport({
-			host: "smtp.hostinger.com",
-			port: 465,
-			secure: true, // SSL
-			auth: {
-				user: SENDER_EMAIL,
-				pass: SENDER_APP_PASSWORD,
-			},
-		});
-
-		// Owner email content (sent to ALL owners)
 		const ownerMail = {
 			from: `"${SITE_NAME} Website" <${SENDER_EMAIL}>`,
-			to: ownerList, // 👈 MULTIPLE RECIPIENTS HERE
+			to: bookingOwnerList, // booking recipients
 			replyTo: email,
 			subject: `New booking request from ${name}`,
 			text: `New booking request
@@ -74,17 +82,28 @@ Message: ${message || "No additional message"}
 <p><small>This email was sent from your website contact form.</small></p>`,
 		};
 
-		// Send to owner(s)
+		// --------------------------------------------
+		// Send owner email first (awaited)
+		// --------------------------------------------
 		await transporter.sendMail(ownerMail);
 
-		// Confirmation email to user
-		await transporter.sendMail({
-			from: `"${SITE_NAME}" <${SENDER_EMAIL}>`,
-			to: email,
-			subject: `We received your booking request — ${SITE_NAME}`,
-			text: `Hi ${name},\n\nThanks for contacting ${SITE_NAME}. We received your request and will be in touch soon.\n\n-- ${SITE_NAME}`,
-		});
+		// --------------------------------------------
+		// Send confirmation email asynchronously
+		// --------------------------------------------
+		transporter
+			.sendMail({
+				from: `"${SITE_NAME}" <${SENDER_EMAIL}>`,
+				to: email,
+				subject: `We received your booking request — ${SITE_NAME}`,
+				text: `Hi ${name},\n\nThanks for contacting ${SITE_NAME}. We received your request and will be in touch soon.\n\n-- ${SITE_NAME}`,
+			})
+			.catch((err) =>
+				console.error("Confirmation email error (non-blocking):", err)
+			);
 
+		// --------------------------------------------
+		// Return response immediately after owner email
+		// --------------------------------------------
 		return res.json({
 			success: true,
 			message: "Booking submitted successfully.",

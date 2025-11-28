@@ -71,7 +71,7 @@ const ContactUs = () => {
 
 						<div className="info-item">
 							<h3>✉️ Email</h3>
-							<p>info@goldeneaglecleaning.sg</p>
+							<p>info@goldeneagle-solutions.com</p>
 						</div>
 					</div>
 
