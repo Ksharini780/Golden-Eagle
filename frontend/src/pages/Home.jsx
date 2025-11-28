@@ -97,7 +97,6 @@ const useHeavyCaptcha = () => {
 
 	useEffect(() => {
 		refreshCaptcha();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return { captchaCode, canvasRef, refreshCaptcha };
@@ -129,6 +128,9 @@ function Home() {
 	const [captchaInput, setCaptchaInput] = useState("");
 	const [captchaError, setCaptchaError] = useState("");
 
+	/* NEW: Prevent duplicate clicks */
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	const cleaningOptions = [
 		{ value: "office_building", label: "Office & Building Cleaning" },
 		{ value: "residential", label: "Condominium & Residential Cleaning" },
@@ -155,7 +157,6 @@ function Home() {
 			[key]: !prev[key],
 		}));
 
-		// reset dependent select when toggled off
 		if (key === "cleaning" && selectedTop.cleaning) {
 			setFormData((p) => ({ ...p, cleaningSubService: "" }));
 		}
@@ -167,28 +168,36 @@ function Home() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		if (isSubmitting) return; // ✨ HARD BLOCK for safety
+		setIsSubmitting(true);
+
 		/* CAPTCHA VALIDATION */
 		if (captchaInput.trim().toUpperCase() !== captchaCode.toUpperCase()) {
 			setCaptchaError("Captcha does not match. Please try again.");
 			refreshCaptcha();
+			setIsSubmitting(false);
 			return;
 		}
 		setCaptchaError("");
 
 		if (!selectedTop.cleaning && !selectedTop.marine) {
 			alert("Please choose at least one service category.");
+			setIsSubmitting(false);
 			return;
 		}
 		if (selectedTop.cleaning && !formData.cleaningSubService) {
 			alert("Please select a Cleaning sub-service.");
+			setIsSubmitting(false);
 			return;
 		}
 		if (selectedTop.marine && !formData.marineSubService) {
 			alert("Please select a Marine & Construction sub-service.");
+			setIsSubmitting(false);
 			return;
 		}
 		if (!formData.name || !formData.email || !formData.phone) {
 			alert("Please fill in name, email and phone.");
+			setIsSubmitting(false);
 			return;
 		}
 
@@ -218,30 +227,25 @@ function Home() {
 			message: formData.message,
 		};
 
-		console.log("Submitting booking:", payload);
-
-		/* ------------------------------------
-      SEND TO BACKEND (IMPORTANT PART)
-  -------------------------------------*/
+		/* SEND TO BACKEND */
 		try {
 			const response = await fetch("http://localhost:5000/api/book/submit", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(formData),
+				body: JSON.stringify(payload),
 			});
 
-			if (!response.ok) {
-				throw new Error("Failed to submit form");
-			}
+			if (!response.ok) throw new Error("Failed to submit form");
 
 			alert(`Thank you, ${formData.name}! Your booking has been received.`);
 		} catch (error) {
 			console.error("Error submitting form:", error);
 			alert("Server error. Please try again later.");
+			setIsSubmitting(false);
 			return;
 		}
 
-		/* RESET FIELDS */
+		/* RESET */
 		setFormData({
 			name: "",
 			email: "",
@@ -254,6 +258,7 @@ function Home() {
 		setSelectedTop({ cleaning: false, marine: false });
 		setCaptchaInput("");
 		refreshCaptcha();
+		setIsSubmitting(false);
 	};
 
 	/* RETURN UI */
@@ -301,7 +306,7 @@ function Home() {
 
 			<div className="mt-10 mid-img">
 				<img
-					src="/home-img.jpg"
+					src="/homePage-img.jpg"
 					alt="Golden Eagle Cleaning Team"
 					className="rounded-xl shadow-lg mx-auto mid-img-el"
 				/>
@@ -314,36 +319,41 @@ function Home() {
 						Your Trusted Cleaning Partner in Singapore
 					</h2>
 
-					<p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-						Golden Eagle Cleaning Solution delivers{" "}
-						<span className="text-gold font-semibold">
-							professional, reliable, and high-quality
-						</span>{" "}
-						cleaning services across Singapore — ensuring spotless, safe, and
-						hygienic environments.
-					</p>
-
-					<p className="text-gray-400 mt-4 text-base md:text-lg">
-						From commercial offices and residential properties to industrial and
-						marine facilities, our experienced team ensures excellence, trust,
-						and consistency in every task.
+					<p className="text-gray-300 text-lg md:text-xl test-justify leading-relaxed">
+						Golden Eagle Cleaning Solution delivers professional, reliable, and
+						high-quality cleaning services across Singapore — ensuring spotless,
+						safe, and hygienic environments. From commercial offices and
+						residential properties to industrial and marine facilities, our
+						experienced team ensures excellence, trust, and consistency in every
+						task. <br />
+						<br />
+						Golden Eagle Cleaning Solution, a professional cleaning company
+						based in Singapore. We specialize in providing high-quality cleaning
+						services for residential, commercial, and industrial properties. At
+						Golden Eagle solutions, we believe in delivering excellence,
+						reliability, and trust in every service we provide. Our trained
+						cleaning team ensures that your premises remain spotless, hygienic,
+						and well-maintained — allowing you to focus on what matters most.
+						<br />
 					</p>
 
 					<div className="points-cont mt-6 space-y-2">
-						<p>
-							<span className="point-icon">🟊</span> Office & commercial cleaning
+						<p className="text-gray-300 text-lg md:text-xl text-left leading-relaxed">
+							We offer a range of services including:
 						</p>
 						<p>
-							<span className="point-icon">🟊</span> Residential & condominium
+							<span className="point-icon">🟊</span> Office and building cleaning
+						</p>
+						<p>
+							<span className="point-icon">🟊</span> Condominium and residential
+						</p>
+						<p>
+							<span className="point-icon">🟊</span> Post-renovation and deep
 							cleaning
 						</p>
 						<p>
-							<span className="point-icon">🟊</span> Industrial & marine
-							maintenance
-						</p>
-						<p>
-							<span className="point-icon">🟊</span> Deep cleaning &
-							post-renovation care
+							<span className="point-icon">🟊</span> Floor polishing and carpet
+							cleaning
 						</p>
 					</div>
 				</div>
@@ -556,8 +566,15 @@ function Home() {
 								</div>
 
 								{/* Submit */}
-								<button type="submit" className="book-btn">
+								{/* <button type="submit" className="book-btn">
 									Submit
+								</button> */}
+								<button
+									type="submit"
+									className="book-btn"
+									disabled={isSubmitting}
+								>
+									{isSubmitting ? "Submitting..." : "Submit"}
 								</button>
 							</form>
 						</div>

@@ -10,11 +10,16 @@ const {
 	SITE_NAME = "Golden Eagle",
 } = process.env;
 
+// Convert multiple owner emails into an array
+// Example in .env:
+// OWNER_EMAIL=info@domain.com,accounts@domain.com
+const ownerList = OWNER_EMAIL.split(",").map((e) => e.trim());
+
 /**
  * submitBooking - expects JSON body:
  * { name, email, phone, services (array or string), message }
  *
- * Sends an email to OWNER_EMAIL with Reply-To set to user's email.
+ * Sends an email to OWNER_EMAIL(s) with Reply-To set to user's email.
  */
 export const submitBooking = async (req, res) => {
 	try {
@@ -33,20 +38,24 @@ export const submitBooking = async (req, res) => {
 			? services.join(", ")
 			: String(services || "Not provided");
 
-		// Create transporter for Gmail (App Password)
+		// --------------------------------------------
+		// ✅ Hostinger SMTP Transporter
+		// --------------------------------------------
 		const transporter = nodemailer.createTransport({
-			service: "gmail",
+			host: "smtp.hostinger.com",
+			port: 465,
+			secure: true, // SSL
 			auth: {
 				user: SENDER_EMAIL,
 				pass: SENDER_APP_PASSWORD,
 			},
 		});
 
-		// Owner email content
+		// Owner email content (sent to ALL owners)
 		const ownerMail = {
 			from: `"${SITE_NAME} Website" <${SENDER_EMAIL}>`,
-			to: OWNER_EMAIL,
-			replyTo: email, // IMPORTANT: Replying to the owner will reply to the user
+			to: ownerList, // 👈 MULTIPLE RECIPIENTS HERE
+			replyTo: email,
 			subject: `New booking request from ${name}`,
 			text: `New booking request
 Name: ${name}
@@ -65,12 +74,10 @@ Message: ${message || "No additional message"}
 <p><small>This email was sent from your website contact form.</small></p>`,
 		};
 
-		// Send to owner
+		// Send to owner(s)
 		await transporter.sendMail(ownerMail);
 
-		// Optional: send a confirmation email to the user (commented by default)
-		// Uncomment the block below if you want to auto-confirm to customer.
-
+		// Confirmation email to user
 		await transporter.sendMail({
 			from: `"${SITE_NAME}" <${SENDER_EMAIL}>`,
 			to: email,

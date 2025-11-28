@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bookingRoutes from "./routes/bookingRoutes.js";
+import feedbackRoutes from "./routes/feedbackRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(
 
 // Routes
 app.use("/api/book", bookingRoutes);
+app.use("/api/feedback", feedbackRoutes); // <-- add this
 
 // Health check
 app.get("/", (req, res) => res.send("API running..."));
